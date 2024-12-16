@@ -2,11 +2,9 @@ package de.xtkq.voidgen.generator.instances;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import de.xtkq.voidgen.VoidGen;
 import de.xtkq.voidgen.generator.annotations.VoidChunkGenInfo;
 import de.xtkq.voidgen.generator.interfaces.ChunkGen;
 import de.xtkq.voidgen.generator.settings.ChunkGenSettings;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.block.Biome;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.WorldInfo;
@@ -15,6 +13,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
+
+import static de.xtkq.voidgen.utils.StringUtils.isBlank;
 
 @VoidChunkGenInfo(versions = {"1.17.1", "1.18", "1.18.1"})
 public class VoidChunkGen_1_17_1 extends ChunkGen {
@@ -23,7 +24,7 @@ public class VoidChunkGen_1_17_1 extends ChunkGen {
         super(javaPlugin);
         Gson gson = new Gson();
 
-        if (StringUtils.isBlank(paramIdentifier)) {
+        if (isBlank(paramIdentifier)) {
             this.chunkGenSettings = new ChunkGenSettings();
             this.javaPlugin.getLogger().info("Generator settings have not been set. Using default values:");
         } else {

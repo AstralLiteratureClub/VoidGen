@@ -59,9 +59,16 @@ public abstract class ChunkGen extends ChunkGenerator {
         return this.chunkGenSettings.isBedrock();
     }
 
+    protected int getBedrockHeight(ChunkData chunkData){
+        return chunkData.getMinHeight();
+    }
+    protected int getBedrockHeight(WorldInfo worldInfo){
+        return worldInfo.getMinHeight();
+    }
+
     protected void placeBedrock(ChunkData paramChunkData, int paramChunkX, int paramChunkZ) {
         // Bedrock block position
-        int x = 0, y = 64, z = 0;
+        int x = 0, y = getBedrockHeight(paramChunkData), z = 0;
 
         if ((x >= paramChunkX * 16) && (x < (paramChunkX + 1) * 16)) {
             if ((z >= paramChunkZ * 16) && (z < (paramChunkZ + 1) * 16)) {
@@ -73,7 +80,7 @@ public abstract class ChunkGen extends ChunkGenerator {
     @Override
     public void generateBedrock(WorldInfo worldInfo, Random random, int chunkX, int chunkZ, ChunkData chunkData) {
         // Bedrock block position
-        final int x = 0, y = 64, z = 0;
+        final int x = 0, y = worldInfo.getMinHeight(), z = 0;
 
         if ((x >= chunkX * 16) && (x < (chunkX + 1) * 16)) {
             if ((z >= chunkZ * 16) && (z < (chunkZ + 1) * 16)) {
